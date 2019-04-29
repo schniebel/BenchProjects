@@ -1,0 +1,34 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Repeated String</title>
+</head>
+<body>
+	<h1>Repeated String Challenge</h1>
+	
+	<p th:if="${invalidInputs}" class="error">invalid input. letter sequence must only be made up of lowercase letters with no spaced. number of letters in sequence must match number of letters specified</p>
+	
+	
+	<form th:action="@{/repeatedstring}" th:object="${repeatedStringForm}" method="post">
+		<label for="numberOfLetters">Number of letters: </label>
+		<input type="text" id="numberOfLetters" name="numberOfLetters" autofocus="autofocus"/> <br/>
+		<label for="stringSequenceInput">Letter Sequence (Must be lowercase no spaces): </label>
+		<input type="text" id="stringSequenceInput" name="stringSequenceInput" autofocus="autofocus"/> <br/>
+		
+		<br/><br/>
+		<input type="submit" value="Submit"/>
+	</form>
+	
+	<br/>
+	<p>Answer: </p>
+	<div th:if="${inputSubmitted}"> 
+		<p th:text="${repeatedStringAnswer}"></p>
+	</div>
+	
+	<br/>
+	<a th:href="@{/index}">Back to home page</a>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Counting Valleys</title>
+</head>
+<body>
+	<h1>Counting Valleys Challenge</h1>
+	
+	<p th:if="${invalidInputs}" class="error">Invalid Input submitted. Number of steps must be a whole number. Path Sequence must be a series of 'U' and 'D' characters. All caps no white spaces, and number of characters must match number of steps</p>
+	
+	
+	<form th:action="@{/countingvalleys}" th:object="${countingValleysForm}" method="post">
+		<label for="numberOfSteps">Number of Steps: </label>
+		<input type="text" id="numberOfSteps" name="numberOfSteps" autofocus="autofocus"/> <br/>
+		<label for="pathSequence">Path Sequence (must match number of steps specified): </label>
+		<input type="text" id="pathSequence" name="pathSequence" autofocus="autofocus"/> <br/>
+		
+		<br/><br/>
+		<input type="submit" value="Submit"/>
+	</form>
+	
+	<br/>
+	<p>Answer: </p>
+	<div th:if="${inputSubmitted}"> 
+		<p th:text="${countingValleysAnswer}"></p>
+	</div>
+	
+	<br/>
+	<a th:href="@{/index}">Back to home page</a>
+
+
+</body>
+</html>

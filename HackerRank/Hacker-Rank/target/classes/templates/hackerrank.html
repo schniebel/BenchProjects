@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	<title>Getting Started: Handling Form Submission</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	
+	
+	<p>Choose Challenge:</p></br>
+	
+	
+	<body>
+	<h1>HackerRank Spring Boot App!</h1>
+    <form action="#" th:action="@{/hackerrank}" th:object="${hackerrank}" method="post">
+    	<p>Type Challenge: <input type="text" th:field="*{challengeName}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+
+</body>
+
+</html>

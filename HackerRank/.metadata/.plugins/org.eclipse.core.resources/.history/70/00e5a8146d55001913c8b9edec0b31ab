@@ -1,0 +1,5 @@
+package com.hackerrank.services;
+
+public class RepeatedStringService {
+
+}

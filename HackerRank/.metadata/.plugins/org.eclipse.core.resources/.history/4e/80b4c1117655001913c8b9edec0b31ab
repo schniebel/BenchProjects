@@ -1,0 +1,50 @@
+package com.hackerrank.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class RepeatedStringService {
+	
+	public String run(long numberOfLetters, String stringSequenceInput) {
+		
+		return Long.toString(repeatedString(stringSequenceInput, numberOfLetters));
+	}
+	
+	
+    private static long repeatedString(String s, long n) {
+    	
+    	//10
+    	//abc
+    	
+    	long answer = 0;
+    	
+    	List<Character> sequence = new ArrayList<Character>();
+    	
+    	for(int i=0; i<=s.length(); i++) {
+    		
+    		if(sequence.size() < n) {
+    			sequence.add(s.charAt(i));
+    		
+    			if(i == s.length() - 1){
+    				i = 0;
+    			}
+    			
+    		}
+
+    	}
+    	
+    	for(char c : sequence) {
+    		
+    		if(c == 'a') {
+    			answer++;
+    		}
+    	}
+    	
+    	return answer;
+
+    }
+
+}

@@ -1,0 +1,34 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Jumping On Clouds</title>
+</head>
+<body>
+	<h1>Jumping On Clouds Challenge</h1>
+	
+	<p th:if="${invalidInputs}" class="error">invalid input. Cloud sequence must only be made up of '1's and '0's seperated by a space. number of clouds in sequence must match number of clouds specified</p>
+	
+	
+	<form th:action="@{/jumpingonclouds}" th:object="${jumpingOnCloudsForm}" method="post">
+		<label for="numberOfSocks">Number of clouds: </label>
+		<input type="text" id="numberOfClouds" name="numberOfClouds" autofocus="autofocus"/> <br/>
+		<label for="cloudSequenceInput">Cloud Sequence (must match number of clouds specified. separated by white space): </label>
+		<input type="text" id="cloudSequenceInput" name="cloudSequenceInput" autofocus="autofocus"/> <br/>
+		
+		<br/><br/>
+		<input type="submit" value="Submit"/>
+	</form>
+	
+	<br/>
+	<p>Answer: </p>
+	<div th:if="${inputSubmitted}"> 
+		<p th:text="${jumpingOnCloudsAnswer}"></p>
+	</div>
+	
+	<br/>
+	<a th:href="@{/index}">Back to home page</a>
+
+
+</body>
+</html>

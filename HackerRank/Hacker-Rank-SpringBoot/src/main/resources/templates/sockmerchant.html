@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sock Merchant</title>
+</head>
+<body>
+	<h1>Sock Merchant Challenge</h1>
+	
+	<p th:if="${invalidInputs}" class="error">invalid input. Sock sequence must only be made up of whole numbers seperated by a space. number of socks in sequence must match number of socks specified</p>
+	
+	
+	<form th:action="@{/sockmerchant}" th:object="${sockMerchantForm}" method="post">
+		<label for="numberOfSocks">Number of Socks: </label>
+		<input type="text" id="numberOfSocks" name="numberOfSocks" autofocus="autofocus"/> <br/>
+		<label for="sockSequenceInput">Sock Sequence (must match number of socks specified. separated by white space): </label>
+		<input type="text" id="sockSequenceInput" name="sockSequenceInput" autofocus="autofocus"/> <br/>
+		
+		<br/><br/>
+		<input type="submit" value="Submit"/>
+	</form>
+	
+	<br/>
+	<p>Answer: </p>
+	<div th:if="${inputSubmitted}"> 
+		<p th:text="${sockMerchantAnswer}"></p>
+	</div>
+	
+	<br/>
+	<a th:href="@{/index}">Back to home page</a>
+
+
+</body>
+</html>

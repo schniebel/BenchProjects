@@ -1,0 +1,108 @@
+package com.hackerrank.validator;
+
+
+import java.util.List;
+import java.util.regex.Pattern;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class HackerRankValidator {
+	
+	//challenge selection validation
+	public boolean isValidChallengeInput(String challengeName) {
+		boolean isValidInput = false;
+		
+		if(challengeName.equals("Counting Valleys") || challengeName.equals("Sock Merchant") || challengeName.contentEquals("Jumping On Clouds")) {
+			isValidInput = true;
+		}
+	
+		return isValidInput;
+	}
+	
+	//Counting Valley validation
+	public boolean isValidCountingValleysInput(int numberOfSteps, String pathSequence) {
+		boolean isValidInput = true;
+		char[] pathSequenceArray = pathSequence.toCharArray();
+		
+		//check that step sequence matches number of steps
+		if(pathSequence.length() != numberOfSteps) {
+			isValidInput = false;
+		}
+			
+		//check that path sequence contains correct characters
+		for(char step : pathSequenceArray) {
+			if(step != 'U' && step != 'D') {
+				isValidInput = false;
+			}
+		}
+
+		return isValidInput;
+		
+	}
+	
+	//Sock Merchant validation
+	public boolean isValidSockMerchantInput(int numberOfSocks, String sockSequenceInput) {
+		boolean isValidInput = true;
+		
+		String[] sockSequenceArray = sockSequenceInput.trim().split(" ");
+		Pattern pattern = Pattern.compile(".*[^0-9].*");
+		
+		//check that sock sequence matches number of socks specified
+		if(sockSequenceArray.length != numberOfSocks) {
+			isValidInput = false;
+		}
+		
+		//check that sock sequence contains only numbers
+		for(String sock : sockSequenceArray) {
+			if(pattern.matcher(sock).matches()) {
+				isValidInput = false;
+			}
+		}
+		return isValidInput;
+		
+	}
+	
+	//Jumping on clouds validation
+	public boolean isValidJumpingOnCloudsInput(int numberOfClouds, String cloudSequenceInput) {
+		boolean isValidInput = true;
+		
+		String[] cloudSequenceArray = cloudSequenceInput.trim().split(" ");
+		Pattern pattern = Pattern.compile(".*[^0-1].*");
+		
+		//check that sock sequence matches number of socks specified
+		if(cloudSequenceArray.length != numberOfClouds) {
+			isValidInput = false;
+		}
+		
+		//check that sock sequence contains only numbers between 0 and 1
+		for(String cloud : cloudSequenceArray) {
+			if(pattern.matcher(cloud).matches()) {
+				isValidInput = false;
+			}
+		}
+		return isValidInput;
+		
+	}
+	
+	//repeated string validation
+	public boolean isValidRepeatedStringInput(int numberOfLetters, String stringSequenceInput) {
+		boolean isValidInput = true;
+		
+		Pattern pattern = Pattern.compile("a-z]+");
+		
+		//check that string sequence matches number of letters specified
+		if(stringSequenceInput.length() != numberOfLetters) {
+			isValidInput = false;
+		}
+		
+		//check that sock sequence contains only lower case letters
+		if(pattern.matcher(stringSequenceInput).matches()) {
+			isValidInput = false;
+		}
+
+		return isValidInput;
+		
+	}	
+	
+}

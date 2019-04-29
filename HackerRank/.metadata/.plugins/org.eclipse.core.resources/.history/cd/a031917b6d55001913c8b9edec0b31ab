@@ -1,0 +1,6 @@
+package com.hackerrank.services;
+
+@Component
+public class RepeatedStringService {
+
+}

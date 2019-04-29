@@ -1,0 +1,19 @@
+package com.hackerrank.services;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class RepeatedStringService {
+	
+	public String run(long numberOfLetters, String stringSequenceInput) {
+		
+		return Long.toString(repeatedString(stringSequenceInput, numberOfLetters));
+	}
+	
+	
+    private static long repeatedString(String s, long n) {
+
+
+    }
+
+}

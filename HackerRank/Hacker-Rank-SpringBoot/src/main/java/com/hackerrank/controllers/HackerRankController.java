@@ -1,0 +1,166 @@
+package com.hackerrank.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.hackerrank.beans.CountingValleysForm;
+import com.hackerrank.beans.HackerRankForm;
+import com.hackerrank.beans.JumpingOnCloudsForm;
+import com.hackerrank.beans.RepeatedStringForm;
+import com.hackerrank.beans.SockMerchantForm;
+import com.hackerrank.services.CountingValleysService;
+import com.hackerrank.services.JumpingOnCloudsService;
+import com.hackerrank.services.RepeatedStringService;
+import com.hackerrank.services.SockMerchantService;
+import com.hackerrank.validator.HackerRankValidator;
+
+@Controller
+public class HackerRankController {
+	
+	@Autowired
+	HackerRankValidator hackerRankValidator;
+	@Autowired
+	private CountingValleysService countingValleysService;
+	@Autowired
+	private SockMerchantService sockMerchantService;
+	@Autowired
+	private JumpingOnCloudsService jumpingOnCloudsService;
+	@Autowired
+	private RepeatedStringService repeatedStringService;
+	
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public String getHomePage() {	
+		return "index";
+	}
+
+	@RequestMapping(value="/hackerrank", method=RequestMethod.GET)
+	public String getHackerRankChallenge() {	
+		return "hackerrank";
+	}
+	
+	@RequestMapping(value="/hackerrank", method=RequestMethod.POST)
+	public String hackerRankChallenge(@ModelAttribute(name="hackerRankForm") HackerRankForm hackerRankForm, Model model) {
+		
+		String challenge = hackerRankForm.getChallenge();
+		String mapping;
+		if(hackerRankValidator.isValidChallengeInput(challenge)) {
+	        switch (challenge) {
+	            case "Counting Valleys": mapping = "countingvalleys";
+	                    break;
+	            case "Sock Merchant": mapping = "sockmerchant";
+	                    break;
+	            case "Jumping On Clouds": mapping = "jumpingonclouds";
+	            		break;	
+	            case "Repeated String": mapping = "repeatedstring";
+        				break;		
+	            default: mapping = "index";
+	            		break;
+	        }
+			
+			return mapping;
+		} else {
+			model.addAttribute("invalidChallenge", true);
+			return "hackerrank";	
+		}
+		
+		
+	}
+	
+	@RequestMapping(value="/countingvalleys", method=RequestMethod.GET)
+	public String getCountingValleysInput() {
+		return "countingvalleys";
+		
+	}
+	
+	@RequestMapping(value="/countingvalleys", method=RequestMethod.POST)
+	public String countingValleys(@ModelAttribute(name="countingValleysForm") CountingValleysForm countingValleysForm, Model model) {
+
+		int numberOfSteps = countingValleysForm.getNumberOfSteps();
+		String pathSequence = countingValleysForm.getPathSequence();
+		
+		
+		if(hackerRankValidator.isValidCountingValleysInput(numberOfSteps, pathSequence)) {
+			
+			model.addAttribute("inputSubmitted", true);
+			model.addAttribute("countingValleysAnswer", countingValleysService.run(numberOfSteps, pathSequence));
+			return "countingvalleys";
+		} else {
+			model.addAttribute("invalidInputs", true);
+			return "countingvalleys";	
+		}
+		
+	}
+	
+	@RequestMapping(value="/sockmerchant", method=RequestMethod.GET)
+	public String getSockMerchentInput() {
+		return "sockmerchant";
+		
+	}
+	
+	@RequestMapping(value="/sockmerchant", method=RequestMethod.POST)
+	public String sockMerchant(@ModelAttribute(name="sockMerchantForm") SockMerchantForm sockMerchantForm, Model model) {
+		
+		int numberOfSocks = sockMerchantForm.getNumberOfSocks();
+		String sockSequenceInput = sockMerchantForm.getSockSequenceInput();
+		
+		if(hackerRankValidator.isValidSockMerchantInput(numberOfSocks, sockSequenceInput)) {
+			model.addAttribute("inputSubmitted", true);
+			model.addAttribute("sockMerchantAnswer", sockMerchantService.run(numberOfSocks, sockSequenceInput));
+			return "sockmerchant";
+		} else {
+			model.addAttribute("invalidInputs", true);
+			return "sockmerchant";
+		}
+		
+	}
+	
+	@RequestMapping(value="/jumpingonclouds", method=RequestMethod.GET)
+	public String getCountingCloudsInput() {
+		return "jumpingonclouds";
+		
+	}	
+	@RequestMapping(value="/jumpingonclouds", method=RequestMethod.POST)
+	public String countingClouds(@ModelAttribute(name="jumpingOnCloudsForm") JumpingOnCloudsForm jumpingOnCloudsForm, Model model) {
+		
+		int numberOfClouds = jumpingOnCloudsForm.getNumberOfClouds();
+		String cloudSequenceInput = jumpingOnCloudsForm.getCloudSequenceInput();
+		
+		if(hackerRankValidator.isValidJumpingOnCloudsInput(numberOfClouds, cloudSequenceInput)) {
+			model.addAttribute("inputSubmitted", true);
+			model.addAttribute("jumpingOnCloudsAnswer", jumpingOnCloudsService.run(numberOfClouds, cloudSequenceInput));
+			return "jumpingonclouds";
+		} else {
+			model.addAttribute("invalidInputs", true);
+			return "jumpingonclouds";
+		}
+
+	}
+	
+	@RequestMapping(value="/repeatedstring", method=RequestMethod.GET)
+	public String getRepeatedStringInput() {
+		return "repeatedstring";
+		
+	}	
+	@RequestMapping(value="/repeatedstring", method=RequestMethod.POST)
+	public String repeatedString(@ModelAttribute(name="repeatedStringForm") RepeatedStringForm repeatedStringForm, Model model) {
+		
+		long numberOfLetters = repeatedStringForm.getNumberOfLetters();
+		String stringSequenceInput = repeatedStringForm.getStringSequenceInput();
+		
+		if(hackerRankValidator.isValidRepeatedStringInput(stringSequenceInput)) {
+			model.addAttribute("inputSubmitted", true);
+			model.addAttribute("repeatedStringAnswer", repeatedStringService.run(numberOfLetters, stringSequenceInput));
+			return "repeatedstring";
+		} else {
+			model.addAttribute("invalidInputs", true);
+			return "repeatedstring";
+		}
+
+	}	
+	
+
+}

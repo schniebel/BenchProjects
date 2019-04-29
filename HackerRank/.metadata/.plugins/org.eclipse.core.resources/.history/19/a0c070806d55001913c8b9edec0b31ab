@@ -1,0 +1,13 @@
+package com.hackerrank.services;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class RepeatedStringService {
+	
+	public String run(long numberOfLetters, stringSequenceInput, String cloudSequenceInput) {
+		
+		return Integer.toString(calculateMatchingSockCount(numberOfClouds, cloudSequenceInput));
+	}
+
+}

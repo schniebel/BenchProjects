@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Hacker Rank Challenge Selection</title>
+</head>
+<body>
+	<h1>Select Challenge</h1>
+	
+	<p th:if="${invalidChallenge}" class="error">Invalid challenge selected. see options below</p>
+	
+	<form th:action="@{/hackerrank}" th:object="${hackerRankForm}" method="post">
+		<label for="challenge">Challenge</label>
+		<input type="text" id="challenge" name="challenge" autofocus="autofocus"/>
+		<br/><br/>
+		<input type="submit" value="Select Challenge"/>
+	</form>
+	
+	<br/>
+	<br/>
+	<br/>
+	<h2>Options: </h2>
+	<p>Counting Valleys </p>
+	<p>Sock Merchant </p>
+	<p>Jumping On Clouds</p>
+	<p>Repeated String</p>
+	<br/>
+	<a th:href="@{/index}">Back to home page</a>
+
+</body>
+</html>
